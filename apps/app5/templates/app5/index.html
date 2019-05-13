@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}	
+</head>
+<style>
+    #box{
+        width: 500px;
+        height: 300px;
+        overflow-y: scroll;
+        border: 1px solid black;
+        padding: 20px;
+    }
+    .loc{
+        width: 200px;
+        height:200px;
+        border: 1px solid black;
+        display: inline-block;
+        vertical-align: top; color: #000;
+    }
+    .gold{
+        color: goldenrod;
+    }
+   
+</style>
+<body>
+   <center>
+        <h3>Your Gold: {{request.session.gold}}</h3>
+    <div class='loc'>
+        <form method='POST'action='/process'>
+            {% csrf_token %}
+        <h2> Farm</h2>
+        <h3>Earn 10 to 20 Golds</h3>
+        <input type="hidden" name="location" value="farm"/>
+        <input type="submit" value="Find Gold">
+    </form></div>
+    <div class='loc'><form method='POST'action='/process'>
+        {% csrf_token %}
+        <h2> Cave</h2>
+        <h3>Earn 5 to 20 Golds</h3>
+        <input type="hidden" name="location" value="cave"/>
+        <input type="submit" value="Find Gold">
+    </form></div>
+    <div class='loc'><form method='POST'action='/process'>
+        {% csrf_token %}
+        <h2> House</h2>
+        <h3>Earn 0 to 50 Golds</h3>
+        <input type="hidden" name="location" value="house"/>
+        <input type="submit" value="Find Gold">
+    </form></div>
+    <div class='loc'><form method='POST'action='/process'>
+        {% csrf_token %}
+        <h2> Casino</h2> 
+        <h3> Earn/lost 10 to 20 Golds</h3>
+        <input type="hidden" name="location" value="casino"/>
+        <input type="submit" value="Find Gold">
+    </form></div> 
+</br>
+</br>
+    <h3>Activites:</h3>
+    <div id="box">{{request.session.message | safe}}</div>
+    <form action='/reset'><input type="submit" value="Play Again">
+    </form>
+    
+   </center>
+</body>
+</html>
